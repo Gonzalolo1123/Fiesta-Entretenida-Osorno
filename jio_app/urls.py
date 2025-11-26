@@ -68,4 +68,42 @@ urlpatterns = [
     
     #Contabilidad
     path('panel/contabilidad/', views.contabilidad, name='contabilidad'),
+    
+    # CRUD de gastos operativos
+    path('panel/gastos/', views.gastos_list, name='gastos_list'),
+    path('panel/gastos/create/', views.gasto_create_json, name='gasto_create_json'),
+    path('panel/gastos/<int:gasto_id>/json/', views.gasto_detail_json, name='gasto_detail_json'),
+    path('panel/gastos/<int:gasto_id>/update/', views.gasto_update_json, name='gasto_update_json'),
+    path('panel/gastos/<int:gasto_id>/delete/', views.gasto_delete_json, name='gasto_delete_json'),
+    
+    # CRUD de promociones
+    path('panel/promociones/', views.promociones_list, name='promociones_list'),
+    path('panel/promociones/create/', views.promocion_create_json, name='promocion_create_json'),
+    path('panel/promociones/<int:promocion_id>/json/', views.promocion_detail_json, name='promocion_detail_json'),
+    path('panel/promociones/<int:promocion_id>/update/', views.promocion_update_json, name='promocion_update_json'),
+    path('panel/promociones/<int:promocion_id>/change-estado/', views.promocion_change_estado_json, name='promocion_change_estado_json'),
+    path('panel/promociones/<int:promocion_id>/delete/', views.promocion_delete_json, name='promocion_delete_json'),
+    
+    # CRUD de precios por temporada
+    path('panel/precios-temporada/', views.precios_temporada_list, name='precios_temporada_list'),
+    path('panel/precios-temporada/create/', views.precio_temporada_create_json, name='precio_temporada_create_json'),
+    path('panel/precios-temporada/<int:precio_id>/json/', views.precio_temporada_detail_json, name='precio_temporada_detail_json'),
+    path('panel/precios-temporada/<int:precio_id>/update/', views.precio_temporada_update_json, name='precio_temporada_update_json'),
+    path('panel/precios-temporada/<int:precio_id>/delete/', views.precio_temporada_delete_json, name='precio_temporada_delete_json'),
+    
+    # CRUD de materiales/inventario
+    path('panel/materiales/', views.materiales_list, name='materiales_list'),
+    path('panel/materiales/create/', views.material_create_json, name='material_create_json'),
+    path('panel/materiales/<int:material_id>/json/', views.material_detail_json, name='material_detail_json'),
+    path('panel/materiales/<int:material_id>/update/', views.material_update_json, name='material_update_json'),
+    path('panel/materiales/<int:material_id>/delete/', views.material_delete_json, name='material_delete_json'),
+    path('panel/materiales/categoria/create/', views.categoria_material_create_json, name='categoria_material_create_json'),
+    
+    # CRUD de proveedores
+    path('panel/proveedores/', views.proveedores_list, name='proveedores_list'),
+    path('panel/proveedores/create/', views.proveedor_create_json, name='proveedor_create_json'),
+    path('panel/proveedores/<int:proveedor_id>/json/', views.proveedor_detail_json, name='proveedor_detail_json'),
+    path('panel/proveedores/<int:proveedor_id>/update/', views.proveedor_update_json, name='proveedor_update_json'),
+    path('panel/proveedores/<int:proveedor_id>/delete/', views.proveedor_delete_json, name='proveedor_delete_json'),
+    
 ]
