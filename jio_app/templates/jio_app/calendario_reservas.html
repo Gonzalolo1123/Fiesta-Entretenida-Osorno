@@ -536,7 +536,7 @@
 {% block content %}
 <div class="calendario-container">
   <div class="calendario-header">
-    <h1>Calendario de Reservas</h1>
+    <h1>Calendario de reservas</h1>
     <p>Selecciona una fecha para ver la disponibilidad y hacer tu reserva</p>
   </div>
 
@@ -555,7 +555,7 @@
 
     <!-- Información de disponibilidad -->
     <div class="disponibilidad-info">
-      <h3>Información de Disponibilidad</h3>
+      <h3>Información de disponibilidad</h3>
       <div class="disponibilidad-legend">
         <div class="legend-item">
           <span class="legend-color disponible"></span>
@@ -577,7 +577,7 @@
       <div class="modal-reserva-overlay" id="modal-overlay"></div>
       <div class="modal-reserva-content">
         <div class="modal-reserva-header">
-          <h3>Formulario de Reserva</h3>
+          <h3>Formulario de reserva</h3>
           <button class="modal-close-btn" id="modal-close-btn">&times;</button>
         </div>
         <div class="modal-reserva-body">
@@ -586,7 +586,7 @@
           <form id="formulario-reserva">
             <!-- Datos del Cliente -->
             <div class="form-group" style="grid-column: 1 / -1; margin-top: 0.5rem; margin-bottom: 0.25rem;">
-              <strong style="font-size: 1.1rem; color: #2c5530;">Datos del Cliente *</strong>
+              <strong style="font-size: 1.1rem; color: #2c5530;">Datos del cliente *</strong>
             </div>
             
             <div class="form-group">
@@ -611,11 +611,11 @@
 
             <!-- Datos del Evento -->
             <div class="form-group" style="grid-column: 1 / -1; margin-top: 0.5rem; margin-bottom: 0.25rem;">
-              <strong style="font-size: 1.1rem; color: #2c5530;">Datos del Evento</strong>
+              <strong style="font-size: 1.1rem; color: #2c5530;">Datos del evento</strong>
             </div>
             
             <div class="form-group">
-              <label for="hora_instalacion">Hora Instalación *</label>
+              <label for="hora_instalacion">Hora instalación *</label>
               <input type="time" id="hora_instalacion" name="hora_instalacion" required min="09:00">
               <small style="display:block;color:#666;margin-top:0.25rem;">
                 <i class="fas fa-info-circle"></i> Las instalaciones están disponibles desde las 9:00 AM
@@ -623,7 +623,7 @@
             </div>
             
             <div class="form-group">
-              <label>Hora Retiro Estimada</label>
+              <label>Hora retiro estimada</label>
               <div style="padding:0.75rem;background:#f5f5f5;border-radius:4px;border:1px solid #ddd;">
                 <span id="hora_retiro_texto" style="font-weight:bold;color:#2c5530;">--:--</span>
               </div>
@@ -658,9 +658,9 @@
             <!-- Juegos -->
             <div class="form-group" style="grid-column: 1 / -1;">
               <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem;">
-                <label style="margin:0;"><strong>Juegos Disponibles *</strong></label>
+                <label style="margin:0;"><strong>Juegos disponibles *</strong></label>
                 <button type="button" id="btn-add-juego" class="btn btn-secondary" style="padding:0.25rem 0.75rem;font-size:0.875rem;background:#2c5530;color:white;border:none;border-radius:4px;cursor:pointer;">
-                  <i class="fas fa-plus"></i> Agregar Juego
+                  <i class="fas fa-plus"></i> Agregar juego
                 </button>
               </div>
               <div id="juegos-container" style="display:grid;gap:0.75rem;">
@@ -668,15 +668,15 @@
               </div>
               <div id="total-container" style="margin-top:1rem;padding:1rem;background:#fff3e0;border-radius:8px;display:none;">
                 <div style="display:flex;justify-content:space-between;margin-bottom:0.5rem;">
-                  <span>Subtotal Juegos:</span>
+                  <span>Subtotal juegos:</span>
                   <span id="subtotal-juegos">$0</span>
                 </div>
                 <div style="display:flex;justify-content:space-between;margin-bottom:0.5rem;">
-                  <span>Precio por Distancia:</span>
+                  <span>Precio por distancia:</span>
                   <span id="precio-distancia-total">$0</span>
                 </div>
                 <div style="display:flex;justify-content:space-between;margin-bottom:0.5rem;">
-                  <span>Horas Extra:</span>
+                  <span>Horas extra:</span>
                   <span id="precio-horas-extra-total">$0</span>
                 </div>
                 <div style="border-top:1px solid #ccc;padding-top:0.5rem;display:flex;justify-content:space-between;">
@@ -757,7 +757,7 @@
             
             <div class="form-actions">
               <button type="button" id="cancelar-reserva" class="btn-cancelar">Cancelar</button>
-              <button type="submit" class="btn-confirmar" id="btn-submit">Confirmar Reserva</button>
+              <button type="submit" class="btn-confirmar" id="btn-submit">Confirmar reserva</button>
             </div>
           </form>
         </div>

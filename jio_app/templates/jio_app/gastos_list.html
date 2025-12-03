@@ -3,12 +3,12 @@
 {% load jio_filters %}
 {% load humanize %}
 
-{% block title %}Gastos Operativos - JIO{% endblock %}
+{% block title %}Gastos operativos - JIO{% endblock %}
 
 {% block content %}
 <div class="panel-container" style="max-width: 95%; margin: 0 auto; padding: 0 1rem;">
   <div class="panel-header">
-    <h1 class="panel-title">Gastos Operativos</h1>
+    <h1 class="panel-title">Gastos operativos</h1>
     {% if total_gastos %}
     <p class="panel-subtitle">Total filtrado: {{ total_gastos|precio_chileno }}</p>
     {% endif %}
@@ -70,7 +70,7 @@
   <!-- Gastos por categoría (año actual) -->
   {% if gastos_por_categoria %}
   <div class="form-card" style="margin-bottom: 2rem; width: 100%;">
-    <h2 class="panel-title" style="font-size: 1.25rem; color:#2E7D32; margin-bottom: 1rem;">Gastos por Categoría (Este Año)</h2>
+    <h2 class="panel-title" style="font-size: 1.25rem; color:#2E7D32; margin-bottom: 1rem;">Gastos por categoría (este año)</h2>
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;">
       {% for item in gastos_por_categoria %}
       <div style="background: #f8f9fa; padding: 1rem; border-radius: 6px; border-left: 4px solid #3498db; min-width: 0; overflow: hidden; box-sizing: border-box;">
@@ -201,7 +201,7 @@
     <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:.75rem;">
       <h2 class="panel-title" style="font-size:1.25rem; color:#2E7D32; margin:0;">Registro de Gastos</h2>
       <div class="actions-wrap" style="gap:.5rem;">
-        <button type="button" id="btnOpenCreateGasto" class="btn btn-primary"><i class="fas fa-plus"></i> Agregar Gasto</button>
+        <button type="button" id="btnOpenCreateGasto" class="btn btn-primary"><i class="fas fa-plus"></i> Agregar gasto</button>
       </div>
     </div>
     <table class="table" style="font-size: 1.05rem; width: 100%;">

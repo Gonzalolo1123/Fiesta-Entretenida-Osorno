@@ -12,7 +12,7 @@ if (typeof Swal !== 'undefined' && Swal.fire) {
 }
 
 // Función para mostrar errores con SweetAlert2
-function mostrarErroresValidacion(errores, titulo = 'Errores de Validación') {
+function mostrarErroresValidacion(errores, titulo = 'Errores de validación') {
   if (errores.length === 0) return false;
   
   const listaErrores = errores.map(error => `• ${error}`).join('\n');

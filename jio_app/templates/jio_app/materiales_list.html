@@ -136,7 +136,7 @@
     <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:.75rem;">
       <h2 class="panel-title" style="font-size:1.25rem; color:#2E7D32; margin:0;">Inventario de Materiales</h2>
       <div class="actions-wrap" style="gap:.5rem;">
-        <button type="button" id="btnOpenCreateMaterial" class="btn btn-primary"><i class="fas fa-plus"></i> Agregar Material</button>
+        <button type="button" id="btnOpenCreateMaterial" class="btn btn-primary"><i class="fas fa-plus"></i> Agregar material</button>
       </div>
     </div>
     <table class="table">
@@ -306,7 +306,7 @@
         </label>
         <div class="form-actions" style="grid-column: 1 / -1; display: flex; gap: 0.75rem; justify-content: flex-end; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #e0e0e0;">
           <button type="button" class="btn btn-secondary" data-modal-close style="min-width: 100px; padding: 0.75rem 1.5rem;">Cancelar</button>
-          <button type="submit" class="btn btn-primary" style="min-width: 140px; padding: 0.75rem 1.5rem; white-space: nowrap;">Crear Proveedor</button>
+          <button type="submit" class="btn btn-primary" style="min-width: 140px; padding: 0.75rem 1.5rem; white-space: nowrap;">Crear proveedor</button>
         </div>
       </form>
     </div>
@@ -317,7 +317,7 @@
   <div id="modalCreateCategoriaQuick" class="modal" aria-hidden="true">
     <div class="modal-content" style="max-width: 500px; width: 90%;">
       <div class="modal-header">
-        <h2 style="margin: 0; font-size: 1.5rem;">Nueva Categoría</h2>
+        <h2 style="margin: 0; font-size: 1.5rem;">Nueva categoría</h2>
         <button class="modal-close" data-modal-close style="font-size: 1.5rem; padding: 0.25rem 0.5rem;">&times;</button>
       </div>
       <form id="formCreateCategoriaQuick" class="form-grid" style="padding: 1.5rem; gap: 1rem;">
@@ -331,7 +331,7 @@
         </label>
         <div class="form-actions" style="grid-column: 1 / -1; display: flex; gap: 0.75rem; justify-content: flex-end; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #e0e0e0;">
           <button type="button" class="btn btn-secondary" data-modal-close style="min-width: 100px; padding: 0.75rem 1.5rem;">Cancelar</button>
-          <button type="submit" class="btn btn-primary" style="min-width: 140px; padding: 0.75rem 1.5rem; white-space: nowrap;">Crear Categoría</button>
+          <button type="submit" class="btn btn-primary" style="min-width: 140px; padding: 0.75rem 1.5rem; white-space: nowrap;">Crear categoría</button>
         </div>
       </form>
     </div>
@@ -488,7 +488,7 @@
               // Mostrar mensaje de éxito sin recargar la página
               if (typeof Swal !== 'undefined' && Swal.fire) {
                 Swal.fire({
-                  title: '¡Proveedor Creado!',
+                  title: '¡Proveedor creado!',
                   text: data.message,
                   icon: 'success',
                   confirmButtonColor: '#28a745',
@@ -503,7 +503,7 @@
               closeModal(modalProveedorQuick);
               isSubmittingProveedor = false;
             } else {
-              mostrarErroresValidacion(data.errors || ['Error al crear el proveedor'], 'Error al Crear Proveedor');
+              mostrarErroresValidacion(data.errors || ['Error al crear el proveedor'], 'Error al crear proveedor');
               isSubmittingProveedor = false;
               if (submitBtn) {
                 submitBtn.disabled = false;
@@ -575,7 +575,7 @@
               closeModal(modalCategoriaQuick);
               isSubmittingCategoria = false;
             } else {
-              mostrarErroresValidacion(data.errors || ['Error al crear la categoría'], 'Error al Crear Categoría');
+              mostrarErroresValidacion(data.errors || ['Error al crear la categoría'], 'Error al crear categoría');
               isSubmittingCategoria = false;
               if (submitBtn) {
                 submitBtn.disabled = false;

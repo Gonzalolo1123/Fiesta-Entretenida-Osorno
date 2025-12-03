@@ -169,7 +169,7 @@
         {% csrf_token %}
         <!-- Datos del Cliente -->
         <label style="grid-column: 1 / -1; margin-top: 0.5rem; margin-bottom: 0.25rem;">
-          <strong>Datos del Cliente *</strong>
+          <strong>Datos del cliente *</strong>
         </label>
         <label>
           Nombre *
@@ -192,7 +192,7 @@
           <input type="text" id="createClienteTelefono" name="cliente_telefono" placeholder="+56912345678">
         </label>
         <label>
-          Tipo de Cliente *
+          Tipo de cliente *
           <select id="createClienteTipo" name="cliente_tipo" required>
             <option value="particular">Particular</option>
             <option value="empresa">Empresa</option>
@@ -201,24 +201,24 @@
 
         <!-- Fechas y Horarios -->
         <label style="grid-column: 1 / -1; margin-top: 0.5rem; margin-bottom: 0.25rem;">
-          <strong>Datos del Evento</strong>
+          <strong>Datos del evento</strong>
         </label>
         <label>
-          Fecha del Evento *
+          Fecha del evento *
           <input type="date" id="createFechaEvento" name="fecha_evento" required min max>
           <small style="display:block;color:#666;margin-top:0.25rem;visibility:hidden;">
             &nbsp;
           </small>
         </label>
         <label>
-          Hora Instalación *
+          Hora instalación *
           <input type="time" id="createHoraInstalacion" name="hora_instalacion" required min="09:00">
           <small style="display:block;color:#666;margin-top:0.25rem;">
             <i class="fas fa-info-circle"></i> Las instalaciones están disponibles desde las 9:00 AM
           </small>
         </label>
         <label>
-          Hora Retiro *
+          Hora retiro *
           <input type="time" id="createHoraRetiro" name="hora_retiro" required max="23:59">
           <small style="display:block;color:#666;margin-top:0.25rem;">
             <i class="fas fa-info-circle"></i> Se calcula automáticamente 6 horas después de la instalación. Puedes modificarla si necesitas más tiempo. Máximo hasta las 23:59.
@@ -236,7 +236,7 @@
 
         <!-- Dirección con Mapa -->
         <label style="grid-column: 1 / -1;">
-          Dirección del Evento *
+          Dirección del evento *
           <input type="text" id="createDireccion" name="direccion_evento" required
             placeholder="Buscar dirección o seleccionar en el mapa">
           <small style="display:block;color:#666;margin-top:0.25rem;margin-bottom:0.5rem;">
@@ -264,10 +264,10 @@
         <!-- Juegos -->
         <div style="grid-column: 1 / -1;">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem;">
-            <label style="margin:0;"><strong>Juegos Disponibles *</strong></label>
+            <label style="margin:0;"><strong>Juegos disponibles *</strong></label>
             <button type="button" id="btnAddJuegoCreate" class="btn btn-secondary"
               style="padding:0.25rem 0.75rem;font-size:0.875rem;">
-              <i class="fas fa-plus"></i> Agregar Juego
+              <i class="fas fa-plus"></i> Agregar juego
             </button>
           </div>
           <div id="juegosContainerCreate" style="display:grid;gap:0.75rem;">
@@ -275,15 +275,15 @@
           </div>
           <div id="totalContainerCreate" style="margin-top:1rem;padding:1rem;background:#fff3e0;border-radius:8px;">
             <div style="display:flex;justify-content:space-between;margin-bottom:0.5rem;">
-              <span>Subtotal Juegos:</span>
+              <span>Subtotal juegos:</span>
               <span id="subtotalJuegosCreate">$0</span>
             </div>
             <div style="display:flex;justify-content:space-between;margin-bottom:0.5rem;">
-              <span>Precio por Distancia:</span>
+              <span>Precio por distancia:</span>
               <span id="precioDistanciaCreate">$0</span>
             </div>
             <div style="display:flex;justify-content:space-between;margin-bottom:0.5rem;">
-              <span>Horas Extra:</span>
+              <span>Horas extra:</span>
               <span id="precioHorasExtraCreate">$0</span>
             </div>
             <div style="border-top:1px solid #ccc;padding-top:0.5rem;display:flex;justify-content:space-between;">
@@ -315,7 +315,7 @@
 
         <div class="form-actions" style="grid-column: 1 / -1;">
           <button type="button" class="btn btn-secondary" data-modal-close>Cancelar</button>
-          <button type="submit" class="btn btn-primary">Crear Arriendo</button>
+          <button type="submit" class="btn btn-primary">Crear arriendo</button>
         </div>
       </form>
     </div>
@@ -335,7 +335,7 @@
         <input type="hidden" name="arriendo_id" id="editArriendoId">
         <!-- Datos del Cliente (editable en edición) -->
         <label style="grid-column: 1 / -1; margin-top: 0.5rem; margin-bottom: 0.25rem;">
-          <strong>Datos del Cliente</strong>
+          <strong>Datos del cliente</strong>
         </label>
         <label>
           Nombre *
@@ -358,7 +358,7 @@
           <input type="text" id="editClienteTelefono" name="cliente_telefono">
         </label>
         <label>
-          Tipo de Cliente *
+          Tipo de cliente *
           <select id="editClienteTipo" name="cliente_tipo" required>
             <option value="">Seleccione un tipo</option>
             <option value="particular">Particular</option>
@@ -369,21 +369,21 @@
 
         <!-- Fechas y Horarios -->
         <label>
-          Fecha del Evento *
+          Fecha del evento *
           <input type="date" id="editFechaEvento" name="fecha_evento" required min max>
           <small style="display:block;color:#666;margin-top:0.25rem;visibility:hidden;">
             &nbsp;
           </small>
         </label>
         <label>
-          Hora Instalación *
+          Hora instalación *
           <input type="time" id="editHoraInstalacion" name="hora_instalacion" required min="09:00">
           <small style="display:block;color:#666;margin-top:0.25rem;">
             <i class="fas fa-info-circle"></i> Las instalaciones están disponibles desde las 9:00 AM
           </small>
         </label>
         <label>
-          Hora Retiro *
+          Hora retiro *
           <input type="time" id="editHoraRetiro" name="hora_retiro" required max="23:59">
           <small style="display:block;color:#666;margin-top:0.25rem;">
             <i class="fas fa-info-circle"></i> Se calcula automáticamente 6 horas después de la instalación. Puedes modificarla si necesitas más tiempo. Máximo hasta las 23:59.
@@ -401,7 +401,7 @@
 
         <!-- Dirección con Mapa -->
         <label style="grid-column: 1 / -1;">
-          Dirección del Evento *
+          Dirección del evento *
           <input type="text" id="editDireccion" name="direccion_evento" required
             placeholder="Buscar dirección o seleccionar en el mapa">
           <small style="display:block;color:#666;margin-top:0.25rem;margin-bottom:0.5rem;">
@@ -433,7 +433,7 @@
             <label style="margin:0;"><strong>Juegos *</strong></label>
             <button type="button" id="btnAddJuegoEdit" class="btn btn-secondary"
               style="padding:0.25rem 0.75rem;font-size:0.875rem;">
-              <i class="fas fa-plus"></i> Agregar Juego
+              <i class="fas fa-plus"></i> Agregar juego
             </button>
           </div>
           <div id="juegosContainerEdit" style="display:grid;gap:0.75rem;">
@@ -441,15 +441,15 @@
           </div>
           <div id="totalContainerEdit" style="margin-top:1rem;padding:1rem;background:#fff3e0;border-radius:8px;">
             <div style="display:flex;justify-content:space-between;margin-bottom:0.5rem;">
-              <span>Subtotal Juegos:</span>
+              <span>Subtotal juegos:</span>
               <span id="subtotalJuegosEdit">$0</span>
             </div>
             <div style="display:flex;justify-content:space-between;margin-bottom:0.5rem;">
-              <span>Precio por Distancia:</span>
+              <span>Precio por distancia:</span>
               <span id="precioDistanciaEdit">$0</span>
             </div>
             <div style="display:flex;justify-content:space-between;margin-bottom:0.5rem;">
-              <span>Horas Extra:</span>
+              <span>Horas extra:</span>
               <span id="precioHorasExtraEdit">$0</span>
             </div>
             <div style="border-top:1px solid #ccc;padding-top:0.5rem;display:flex;justify-content:space-between;">
@@ -477,7 +477,7 @@
 
         <div class="form-actions" style="grid-column: 1 / -1;">
           <button type="button" class="btn btn-secondary" data-modal-close>Cancelar</button>
-          <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+          <button type="submit" class="btn btn-primary">Guardar cambios</button>
         </div>
       </form>
     </div>
