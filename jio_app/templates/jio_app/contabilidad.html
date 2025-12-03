@@ -156,16 +156,16 @@
 
     <div class="accounting-stats-summary">
       <div class="accounting-stat-box ingresos">
-        <div class="accounting-stat-label">Ingresos del mes</div>
+        <div class="accounting-stat-label">Ingresos del Mes</div>
         <div class="accounting-stat-value ingresos">${{ total_ingresos_mes|floatformat:0|intcomma }}</div>
         <div style="font-size: 0.75rem; color: #666; margin-top: 0.5rem;">{{ total_pagos_mes }} pago{{ total_pagos_mes|pluralize }}</div>
       </div>
       <div class="accounting-stat-box egresos">
-        <div class="accounting-stat-label">Egresos del mes</div>
+        <div class="accounting-stat-label">Egresos del Mes</div>
         <div class="accounting-stat-value egresos">${{ total_egresos_mes|floatformat:0|intcomma }}</div>
       </div>
       <div class="accounting-stat-box saldo">
-        <div class="accounting-stat-label">Saldo neto</div>
+        <div class="accounting-stat-label">Saldo Neto</div>
         <div class="accounting-stat-value saldo">${{ saldo_neto_mes|floatformat:0|intcomma }}</div>
       </div>
     </div>

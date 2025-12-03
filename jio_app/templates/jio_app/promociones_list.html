@@ -314,15 +314,15 @@
         });
       });
       
-       // Manejo de cambio de estado
-       const estadoSelects = document.querySelectorAll('[data-change-estado]');
-       estadoSelects.forEach(select => {
-         // Guardar el valor inicial
-         let valorAnterior = select.value;
-         let procesando = false;
+      // Manejo de cambio de estado
+      const estadoSelects = document.querySelectorAll('[data-change-estado]');
+      estadoSelects.forEach(select => {
+        // Guardar el valor inicial
+        let valorAnterior = select.value;
+        let procesando = false;
          let cambioProgramatico = false; // Bandera para ignorar cambios programáticos
-         
-         select.addEventListener('change', function(e) {
+        
+        select.addEventListener('change', function(e) {
            // Debug: verificar el estado de las banderas
            console.log('=== Evento change disparado ===');
            console.log('cambioProgramatico:', cambioProgramatico);
@@ -339,18 +339,18 @@
              return;
            }
            
-           // Prevenir múltiples ejecuciones
-           if (procesando) {
+          // Prevenir múltiples ejecuciones
+          if (procesando) {
              console.log('=== IGNORADO: Ya procesando ===');
              cambioProgramatico = true;
-             this.value = valorAnterior;
-             return;
-           }
-           
-           e.preventDefault();
-           e.stopPropagation();
-           
-           const promocionId = this.getAttribute('data-change-estado');
+            this.value = valorAnterior;
+            return;
+          }
+          
+          e.preventDefault();
+          e.stopPropagation();
+          
+          const promocionId = this.getAttribute('data-change-estado');
            // Capturar el nuevo estado y su texto ANTES de hacer cualquier cambio
            // Usar e.target.value para asegurar que capturamos el valor correcto del elemento que disparó el evento
            const nuevoEstado = e.target.value || this.value;
@@ -382,13 +382,13 @@
            // Guardar el texto correcto en una variable que no se sobrescriba
            const textoParaMostrar = textoCorrecto;
            const estadoParaEnviar = nuevoEstado;
-           
+          
            // Restaurar el valor anterior inmediatamente para evitar que el select cambie visualmente
            // Usar la bandera para evitar que este cambio dispare otro evento
            // IMPORTANTE: Establecer la bandera ANTES de cambiar el valor
            cambioProgramatico = true;
-           this.value = valorAnterior;
-           procesando = true;
+          this.value = valorAnterior;
+          procesando = true;
            
            console.log('Valores guardados - textoParaMostrar:', textoParaMostrar, 'estadoParaEnviar:', estadoParaEnviar);
           
@@ -437,8 +437,8 @@
                   }
                   return response.json();
                 })
-                 .then(data => {
-                   if (data.success) {
+                .then(data => {
+                  if (data.success) {
                      // Actualizar el valor anterior para reflejar el nuevo estado
                      valorAnterior = estadoParaEnviar;
                     // Mostrar mensaje de éxito
@@ -519,11 +519,11 @@
                 }
                 return response.json();
               })
-               .then(data => {
-                 if (data.success) {
+              .then(data => {
+                if (data.success) {
                    valorAnterior = estadoParaEnviar;
-                   alert(data.message);
-                   location.reload();
+                  alert(data.message);
+                  location.reload();
                 } else {
                   alert(data.error || 'Error al cambiar el estado');
                   location.reload();

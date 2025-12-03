@@ -195,13 +195,13 @@
     <div id="modalCambiarEstadoRepartidor" class="modal" aria-hidden="true">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Cambiar Mi Estado</h2>
+                <h2>Cambiar mi estado</h2>
                 <button class="modal-close" data-modal-close>&times;</button>
             </div>
             <form id="formCambiarEstadoRepartidor" class="form-grid">
                 {% csrf_token %}
                 <label>
-                    Nuevo Estado
+                    Nuevo estado
                     <select name="nuevo_estado" required>
                         <option value="Habilitado" {% if user.repartidor.estado == 'Habilitado' %}selected{% endif %}>Habilitado</option>
                         <option value="Deshabilitado" {% if user.repartidor.estado == 'Deshabilitado' %}selected{% endif %}>Deshabilitado</option>
@@ -220,7 +220,7 @@
     <div id="modalDetalleInstalacion" class="modal" aria-hidden="true">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Detalle de Instalación</h2>
+                <h2>Detalle de instalación</h2>
                 <button class="modal-close" data-modal-close>&times;</button>
             </div>
             <div id="detalleInstalacionContent" style="padding:1rem; overflow-y:auto; flex:1;">
@@ -234,7 +234,7 @@
     <div id="modalDetalleRetiro" class="modal" aria-hidden="true">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Detalle de Retiro</h2>
+                <h2>Detalle de retiro</h2>
                 <button class="modal-close" data-modal-close>&times;</button>
             </div>
             <div id="detalleRetiroContent" style="padding:1rem; overflow-y:auto; flex:1;">
@@ -248,7 +248,7 @@
     <div id="modalMarcarRealizado" class="modal" aria-hidden="true">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Marcar Como Realizado</h2>
+                <h2>Marcar como realizado</h2>
                 <button class="modal-close" data-modal-close>&times;</button>
             </div>
             <form id="formMarcarRealizado" class="form-grid" enctype="multipart/form-data">
