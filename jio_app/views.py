@@ -595,6 +595,8 @@ def crear_reserva_publica(request):
             distancia_km_int = int(distancia_km)
             if distancia_km_int < 0:
                 errors.append('La distancia no puede ser negativa')
+            elif distancia_km_int > 50:
+                errors.append('La distancia no puede ser mayor a 50 km')
         except ValueError:
             errors.append('La distancia debe ser un número válido')
     
@@ -4590,6 +4592,8 @@ def arriendo_create_json(request):
             distancia_km_int = int(distancia_km)
             if distancia_km_int < 0:
                 errors.append('La distancia no puede ser negativa')
+            elif distancia_km_int > 50:
+                errors.append('La distancia no puede ser mayor a 50 km')
         except ValueError:
             errors.append('La distancia debe ser un número válido')
     
@@ -4910,6 +4914,8 @@ def arriendo_update_json(request, arriendo_id: int):
             distancia_km_int = int(distancia_km)
             if distancia_km_int < 0:
                 errors.append('La distancia no puede ser negativa')
+            elif distancia_km_int > 50:
+                errors.append('La distancia no puede ser mayor a 50 km')
             else:
                 PRECIO_POR_KM = 1000
                 reserva.distancia_km = distancia_km_int
@@ -4972,22 +4978,34 @@ def arriendo_update_json(request, arriendo_id: int):
                     errors.append(f'Juego con ID {juego_id} no encontrado')
             
             if not errors and juegos_proporcionados:
-                # Eliminar detalles antiguos y crear nuevos solo si se proporcionaron juegos
-                reserva.detalles.all().delete()
-                # Total incluye juegos + distancia + horas extra
-                precio_distancia = reserva.precio_distancia or 0
-                precio_horas_extra = reserva.precio_horas_extra or 0
-                total_final = total + precio_distancia + precio_horas_extra
-                reserva.total_reserva = total_final
+                # Comparar juegos proporcionados con los existentes para evitar recrear si no cambiaron
+                juegos_existentes_ids = set(reserva.detalles.values_list('juego_id', flat=True))
+                juegos_proporcionados_ids = set([j['juego'].id for j in juegos_validos])
                 
-                for juego_item in juegos_validos:
-                    DetalleReserva.objects.create(
-                        reserva=reserva,
-                        juego=juego_item['juego'],
-                        cantidad=juego_item['cantidad'],
-                        precio_unitario=juego_item['precio_unitario'],
-                        subtotal=juego_item['subtotal'],
-                    )
+                # Solo eliminar y recrear si los juegos realmente cambiaron
+                if juegos_existentes_ids != juegos_proporcionados_ids:
+                    # Eliminar detalles antiguos y crear nuevos solo si los juegos cambiaron
+                    reserva.detalles.all().delete()
+                    # Total incluye juegos + distancia + horas extra
+                    precio_distancia = reserva.precio_distancia or 0
+                    precio_horas_extra = reserva.precio_horas_extra or 0
+                    total_final = total + precio_distancia + precio_horas_extra
+                    reserva.total_reserva = total_final
+                    
+                    for juego_item in juegos_validos:
+                        DetalleReserva.objects.create(
+                            reserva=reserva,
+                            juego=juego_item['juego'],
+                            cantidad=juego_item['cantidad'],
+                            precio_unitario=juego_item['precio_unitario'],
+                            subtotal=juego_item['subtotal'],
+                        )
+                else:
+                    # Si los juegos no cambiaron, solo recalcular el total (por si cambió el precio)
+                    precio_distancia = reserva.precio_distancia or 0
+                    precio_horas_extra = reserva.precio_horas_extra or 0
+                    total_final = total + precio_distancia + precio_horas_extra
+                    reserva.total_reserva = total_final
         # Si no se proporcionaron juegos, mantener los existentes y recalcular el total
         elif not juegos_proporcionados:
             # Recalcular el total con los juegos existentes
@@ -5398,6 +5416,17 @@ def vehiculos_list(request):
     if estado_filter:
         base_qs = base_qs.filter(estado=estado_filter)
 
+    # Lista de colores predefinidos para vehículos
+    COLORES_VEHICULOS = [
+        'Blanco', 'Negro', 'Gris', 'Plata', 'Rojo', 'Azul', 'Verde', 
+        'Amarillo', 'Naranja', 'Marrón', 'Beige', 'Dorado', 'Bordo', 
+        'Celeste', 'Turquesa', 'Violeta', 'Rosa', 'Cobre', 'Champagne'
+    ]
+    
+    # Calcular año máximo (año actual + 1)
+    from datetime import datetime
+    año_maximo = datetime.now().year + 1
+    
     return render(request, 'jio_app/vehiculos_list.html', {
         'vehiculos': base_qs,
         'query': query,
@@ -5407,6 +5436,8 @@ def vehiculos_list(request):
         'direction': direction,
         'tipo_choices': Vehiculo.TIPO_CHOICES,
         'estado_choices': Vehiculo.ESTADO_CHOICES,
+        'colores_vehiculos': COLORES_VEHICULOS,
+        'año_maximo': año_maximo,
     })
 
 
@@ -5467,19 +5498,34 @@ def vehiculo_create_json(request):
 
     errors = []
     
+    # Validar patente: exactamente 6 caracteres
     if not patente:
         errors.append('La patente es obligatoria')
+    elif len(patente) != 6:
+        errors.append('La patente debe tener exactamente 6 caracteres')
     elif Vehiculo.objects.filter(patente=patente).exists():
         errors.append('Ya existe un vehículo con esa patente')
     
     if not tipo or tipo not in [choice[0] for choice in Vehiculo.TIPO_CHOICES]:
         errors.append('Tipo de vehículo inválido')
     
+    # Validar marca: máximo 15 caracteres
     if not marca:
         errors.append('La marca es obligatoria')
+    elif len(marca) > 15:
+        errors.append('La marca no puede exceder 15 caracteres')
     
+    # Validar modelo: máximo 10 caracteres
     if not modelo:
         errors.append('El modelo es obligatorio')
+    elif len(modelo) > 10:
+        errors.append('El modelo no puede exceder 10 caracteres')
+    
+    # Validar color: debe ser uno de los colores predefinidos
+    COLORES_VALIDOS = ['Blanco', 'Negro', 'Gris', 'Plata', 'Rojo', 'Azul', 'Verde', 'Amarillo', 'Naranja', 'Marrón', 'Beige', 'Dorado', 'Bordo', 'Celeste', 'Turquesa', 'Violeta', 'Rosa', 'Cobre', 'Champagne']
+    if color:
+        if color not in COLORES_VALIDOS:
+            errors.append(f'El color debe ser uno de los siguientes: {", ".join(COLORES_VALIDOS)}')
     
     año_int = None
     if not año:
@@ -5540,7 +5586,7 @@ def vehiculo_create_json(request):
             marca=marca,
             modelo=modelo,
             año=año_int,
-            color=color or None,
+            color=color,
             kilometraje_actual=kilometraje,
             estado=estado,
             fecha_ultimo_mantenimiento=fecha_mant,
@@ -5592,12 +5638,31 @@ def vehiculo_update_json(request, vehiculo_id: int):
 
     errors = []
     
-    if patente and patente != vehiculo.patente:
-        if Vehiculo.objects.filter(patente=patente).exists():
+    # Validar patente: exactamente 6 caracteres
+    if patente:
+        if len(patente) != 6:
+            errors.append('La patente debe tener exactamente 6 caracteres')
+        elif patente != vehiculo.patente and Vehiculo.objects.filter(patente=patente).exists():
             errors.append('Ya existe un vehículo con esa patente')
     
     if tipo and tipo not in [choice[0] for choice in Vehiculo.TIPO_CHOICES]:
         errors.append('Tipo de vehículo inválido')
+    
+    # Validar marca: máximo 15 caracteres
+    if marca:
+        if len(marca) > 15:
+            errors.append('La marca no puede exceder 15 caracteres')
+    
+    # Validar modelo: máximo 10 caracteres
+    if modelo:
+        if len(modelo) > 10:
+            errors.append('El modelo no puede exceder 10 caracteres')
+    
+    # Validar color: debe ser uno de los colores predefinidos
+    COLORES_VALIDOS = ['Blanco', 'Negro', 'Gris', 'Plata', 'Rojo', 'Azul', 'Verde', 'Amarillo', 'Naranja', 'Marrón', 'Beige', 'Dorado', 'Bordo', 'Celeste', 'Turquesa', 'Violeta', 'Rosa', 'Cobre', 'Champagne']
+    if color:
+        if color not in COLORES_VALIDOS:
+            errors.append(f'El color debe ser uno de los siguientes: {", ".join(COLORES_VALIDOS)}')
     
     if estado and estado not in [choice[0] for choice in Vehiculo.ESTADO_CHOICES]:
         errors.append('Estado inválido')
