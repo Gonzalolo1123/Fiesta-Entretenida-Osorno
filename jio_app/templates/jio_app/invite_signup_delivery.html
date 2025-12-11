@@ -1,13 +1,13 @@
 {% extends 'jio_app/base_admin.html' %}
 {% load static %}
 
-{% block title %}Registro de Repartidor - JIO{% endblock %}
+{% block title %}Registro de repartidor - JIO{% endblock %}
 
 {% block content %}
 <div class="panel-container">
   <div class="panel-header centered">
     <img src="{% static 'images/logo_jio.png' %}" alt="JIO" class="logo" style="height:60px;margin-bottom:10px;">
-    <h1 class="panel-title">Registro de Repartidor por medio de invitación</h1>
+    <h1 class="panel-title">Registro de repartidor por medio de invitación</h1>
   </div>
   <form method="post" class="form-card">
     {% csrf_token %}

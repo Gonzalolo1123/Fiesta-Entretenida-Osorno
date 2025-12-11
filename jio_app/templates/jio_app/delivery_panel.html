@@ -1,7 +1,7 @@
 {% extends 'jio_app/base_admin.html' %}
 {% load static %}
 
-{% block title %}Panel de Repartidor - JIO{% endblock %}
+{% block title %}Panel de repartidor - JIO{% endblock %}
 
 {% block content %}
 <div class="panel-container">
@@ -27,7 +27,7 @@
     <div class="form-card" style="margin-top:1rem;">
         <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:.75rem;">
             <h2 class="panel-title" style="font-size:1.25rem; color:#2E7D32; margin:0;">
-                <i class="fas fa-calendar-day"></i> Mis Repartos de Hoy
+                <i class="fas fa-calendar-day"></i> Mis repartos de hoy
             </h2>
             <span class="badge badge-info">{{ fecha_hoy|date:"d/m/Y" }}</span>
         </div>
@@ -201,7 +201,7 @@
             <form id="formCambiarEstadoRepartidor" class="form-grid">
                 {% csrf_token %}
                 <label>
-                    Nuevo Estado
+                    Nuevo estado
                     <select name="nuevo_estado" required>
                         <option value="Habilitado" {% if user.repartidor.estado == 'Habilitado' %}selected{% endif %}>Habilitado</option>
                         <option value="Deshabilitado" {% if user.repartidor.estado == 'Deshabilitado' %}selected{% endif %}>Deshabilitado</option>
@@ -220,7 +220,7 @@
     <div id="modalDetalleInstalacion" class="modal" aria-hidden="true">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Detalle de Instalación</h2>
+                <h2>Detalle de instalación</h2>
                 <button class="modal-close" data-modal-close>&times;</button>
             </div>
             <div id="detalleInstalacionContent" style="padding:1rem; overflow-y:auto; flex:1;">
@@ -234,7 +234,7 @@
     <div id="modalDetalleRetiro" class="modal" aria-hidden="true">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Detalle de Retiro</h2>
+                <h2>Detalle de retiro</h2>
                 <button class="modal-close" data-modal-close>&times;</button>
             </div>
             <div id="detalleRetiroContent" style="padding:1rem; overflow-y:auto; flex:1;">
@@ -248,7 +248,7 @@
     <div id="modalMarcarRealizado" class="modal" aria-hidden="true">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Marcar Como Realizado</h2>
+                <h2>Marcar como realizado</h2>
                 <button class="modal-close" data-modal-close>&times;</button>
             </div>
             <form id="formMarcarRealizado" class="form-grid" enctype="multipart/form-data">
@@ -258,7 +258,7 @@
                 
                 <div id="camposPagoInstalacion" style="display:none;">
                     <label>
-                        <span>Método de Pago <span style="color:red;">*</span></span>
+                        <span>Método de pago <span style="color:red;">*</span></span>
                         <select name="metodo_pago" id="metodoPago">
                             <option value="">Seleccione método</option>
                             <option value="efectivo">Efectivo</option>
@@ -268,7 +268,7 @@
                     </label>
 
                     <label id="labelComprobante" style="display:none;">
-                        <span>Comprobante de Pago <span style="color:red;">*</span></span>
+                        <span>Comprobante de pago <span style="color:red;">*</span></span>
                         <input type="file" name="comprobante_pago" id="comprobantePago" accept="image/*" capture="environment">
                         <small style="color:#7f8c8d;">Tome una foto del comprobante de transferencia</small>
                     </label>
@@ -278,7 +278,7 @@
                     </div>
 
                     <label>
-                        Hora de Retiro
+                        Hora de retiro
                         <input type="time" name="hora_retiro" id="horaRetiro">
                         <small style="color:#7f8c8d;">Opcional - Si el cliente quiere cambiar o agendar la hora de retiro</small>
                     </label>
