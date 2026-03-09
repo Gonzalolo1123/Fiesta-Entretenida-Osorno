@@ -77,24 +77,12 @@ WSGI_APPLICATION = 'JIO.wsgi.application'
 
 # Configuración de base de datos para producción (PostgreSQL)
 # Comenta esto si trabajas en desarrollo local con SQLite
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'postgres',
-#         'USER': 'postgres',
-#         'PASSWORD': 'hola1234',
-#         'HOST': 'localhost',
-#         'PORT': '5432',
-#     }
-# }
-
-# Configuración de base de datos para desarrollo (SQLite)
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'jio_db',
-        'USER': 'postgres',
-        'PASSWORD': 'compuvi',
+         'ENGINE': 'django.db.backends.postgresql',
+         'NAME': 'jio_db',
+         'USER': 'postgres',
+         'PASSWORD': 'hola1234',
         'HOST': 'localhost',
         'PORT': '5432',
     }
