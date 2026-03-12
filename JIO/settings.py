@@ -23,7 +23,8 @@ ALLOWED_HOSTS = [
 if os.environ.get("ALLOWED_HOSTS"):
     ALLOWED_HOSTS.extend(h.strip() for h in os.environ["ALLOWED_HOSTS"].split(",") if h.strip())
 
-# Apps (Cloudinary solo si hay credenciales → desarrollo sin instalar cloudinary, producción con)
+# Cloudinary (solo para MEDIA). Importante: NO agregamos cloudinary_storage a INSTALLED_APPS
+# porque ese paquete modifica collectstatic y en Render puede provocar faltantes del admin.
 USE_CLOUDINARY = bool(
     os.environ.get("CLOUDINARY_URL") or os.environ.get("CLOUDINARY_CLOUD_NAME")
 )
@@ -36,13 +37,6 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "FiestaEntreOso_app.apps.FiestaEntreOsoAppConfig",
 ]
-if USE_CLOUDINARY:
-    INSTALLED_APPS.insert(
-        INSTALLED_APPS.index("django.contrib.staticfiles"), "cloudinary_storage"
-    )
-    INSTALLED_APPS.insert(
-        INSTALLED_APPS.index("django.contrib.staticfiles") + 1, "cloudinary"
-    )
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -100,17 +94,16 @@ USE_I18N = True
 USE_TZ = True
 
 # Estáticos: WhiteNoise (collectstatic → staticfiles)
-# STATICFILES_STORAGE lo usan algunos paquetes (ej. django-cloudinary-storage) que aún no leen solo STORAGES
 STATIC_URL = "static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_DIRS = [
     BASE_DIR / "FiestaEntreOso_app" / "static",
 ]
-# Evita fallos de manifest/archivos faltantes en builds (Render). Si quieres el modo estricto, usa CompressedManifest...
-STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
+# Render: modo básico y robusto (sin compresión/manifest) para evitar FileNotFoundError
+STATICFILES_STORAGE = "whitenoise.storage.StaticFilesStorage"
 STORAGES = {
     "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
+        "BACKEND": "whitenoise.storage.StaticFilesStorage",
     },
 }
 
