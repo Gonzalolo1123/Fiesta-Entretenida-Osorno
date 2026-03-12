@@ -1,0 +1,136 @@
+{% extends "FiestaEntreOso_app/base.html" %}
+{% load static %}
+
+{% block body_class %}public-home{% endblock %}
+
+{% block content %}
+<!-- Hero principal -->
+<section id="hero">
+  <div class="hero-shell">
+    <div class="hero-left">
+      <span class="hero-kicker">Cumpleaños • Juegos inflables • Eventos familiares</span>
+      <h1>Fiesta Entretenida Osorno, tu fiesta segura y entretenida</h1>
+      <p>
+        Arriendo de juegos inflables y actividades para que los niños lo pasen increíble.
+        Nosotros nos encargamos del montaje, seguridad y retiro.
+      </p>
+      <div class="hero-actions">
+        <a href="#arriendos" class="btn-hero btn-hero-primary">Ver juegos disponibles</a>
+        <a href="#contacto" class="btn-hero btn-hero-secondary" id="openContactoHero">Pedir información</a>
+      </div>
+    </div>
+
+    <div class="hero-right" aria-hidden="true">
+      <div class="hero-media-card">
+        <img class="hero-media-img" src="{% static 'images/logo_jio.png' %}" alt="Fiesta Entre Oso">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Historia -->
+<section id="historia">
+  <div class="contenedor-historia">
+    <h2>La historia de Fiesta Entre Oso</h2>
+    <p>
+      Fiesta Entre Oso nace en Osorno con una idea simple: que los niños tengan fiestas seguras y entretenidas,
+      y que las familias puedan disfrutar sin preocuparse por el montaje ni la logística.
+    </p>
+    <p>
+      Con el tiempo fuimos sumando más juegos, decoraciones y actividades, siempre con foco en la seguridad,
+      el orden y la puntualidad. Hoy acompañamos cumpleaños, aniversarios, celebraciones escolares y eventos
+      familiares durante todo el año.
+    </p>
+  </div>
+</section>
+
+<!-- Arriendos / Catálogo de juegos -->
+<section id="arriendos">
+  <div class="contenedor-juegos">
+    <h2 class="titulo-seccion">Juegos inflables para tu evento</h2>
+    <p class="subtitulo-seccion">
+      Estos son algunos de los juegos que puedes arrendar para tu fiesta.
+      Pregunta por disponibilidad según fecha y lugar.
+    </p>
+
+    <div class="juegos-grid">
+      {% for item in items_inventario %}
+      <div class="juego-box" data-categoria="{{ item.categoria }}">
+        {% if item.foto %}
+          <img src="{{ item.foto.url }}" alt="{{ item.nombre }}">
+        {% else %}
+          <img src="{% static 'images/logo_jio.png' %}" alt="{{ item.nombre }}">
+        {% endif %}
+        <h3>{{ item.nombre }}</h3>
+        {% if item.descripcion %}
+          <p>{{ item.descripcion }}</p>
+        {% endif %}
+        <div class="dimensiones">
+          <strong>Dimensiones:</strong>
+          <span class="dimension-text">{{ item.dimensiones|default:"—" }}</span>
+        </div>
+        <div class="juego-info">
+          {% if item.capacidad_personas %}
+          <span class="capacidad">Hasta {{ item.capacidad_personas }} niños</span>
+          {% endif %}
+          {% if item.precio_base %}
+          <span class="precio">Desde ${{ item.precio_base }}</span>
+          {% endif %}
+        </div>
+      </div>
+      {% empty %}
+      <div style="grid-column: 1 / -1; text-align: center; padding: 3rem;">
+        <p style="font-size: 1.2rem; color: #666;">
+          Aún no hay productos cargados. Carga el inventario desde el admin.
+        </p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Fotos de referencia (si hay) -->
+{% if imagenes_referencia %}
+<section id="referencias">
+  <div class="contenedor-juegos">
+    <h2 class="titulo-seccion">Fotos de referencia</h2>
+    <p class="subtitulo-seccion">Algunos de nuestros juegos y eventos.</p>
+    <div class="juegos-grid" style="--cols: 4;">
+      {% for ref in imagenes_referencia %}
+      <div class="juego-box">
+        <img src="{{ ref.imagen.url }}" alt="{{ ref.titulo|default:ref.imagen.name }}">
+        {% if ref.titulo %}<h3>{{ ref.titulo }}</h3>{% endif %}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- Actividades -->
+<section id="actividades">
+  <div class="contenedor-empresas">
+    <h2>Actividades que podemos armar para ti</h2>
+    <p>
+      Además de los juegos inflables, te ayudamos a armar una experiencia completa según la edad de los niños
+      y el tipo de celebración.
+    </p>
+
+    <div class="empresas-grid">
+      <div class="empresa-card">
+        <h3>Cumpleaños infantiles</h3>
+        <p>Inflables, sectores de juego y apoyo en montaje para que la fiesta sea segura y ordenada.</p>
+      </div>
+      <div class="empresa-card">
+        <h3>Eventos familiares</h3>
+        <p>Actividades pensadas para distintas edades, con juegos que se adaptan al espacio disponible.</p>
+      </div>
+      <div class="empresa-card">
+        <h3>Colegios y jardines</h3>
+        <p>Jornadas de recreación, aniversarios y días especiales con juegos inflables y dinámicas grupales.</p>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+

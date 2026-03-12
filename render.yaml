@@ -1,14 +1,18 @@
+# Render: sitio Fiesta Entre Oso
+# En el Dashboard → Environment añade: DATABASE_URL (Postgres), CLOUDINARY_URL (imágenes)
 services:
   - type: web
-    name: jio-arriendos
+    name: fiesta-entre-oso
     env: python
-    buildCommand: pip install -r requirements.txt
-    startCommand: python manage.py runserver 0.0.0.0:$PORT
+    buildCommand: |
+      pip install -r requirements.txt
+      python manage.py collectstatic --noinput
+      python manage.py migrate --noinput
+    startCommand: gunicorn JIO.wsgi:application --bind 0.0.0.0:$PORT
     envVars:
       - key: DJANGO_SETTINGS_MODULE
         value: JIO.settings
       - key: SECRET_KEY
         generateValue: true
       - key: DEBUG
-        value: False
-
+        value: "False"

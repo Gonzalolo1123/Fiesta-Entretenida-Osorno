@@ -1,0 +1,8 @@
+# Imágenes para Fiesta Entre Oso
+
+Coloca aquí (o en media/ tras subir por admin):
+- logo_jio.png  — Logo de la empresa
+- favicon.png   — Icono del sitio
+- main_header.png (opcional) — Imagen del hero
+
+Las fotos de inventario y referencias se suben desde el admin de Django (media/inventario/ y media/referencias/).

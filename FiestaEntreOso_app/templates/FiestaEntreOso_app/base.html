@@ -1,0 +1,106 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Juegos inflables y eventos</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}">
+  <link rel="apple-touch-icon" href="{% static 'images/favicon.png' %}">
+
+  <!-- Estilos base (mismos del header de JIO para mantener look) -->
+  <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  <link rel="stylesheet" href="{% static 'css/signIn-Up.css' %}">
+  <link rel="stylesheet" href="{% static 'css/index.css' %}">
+
+  <!-- Fuentes -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  {% block extra_head %}{% endblock %}
+</head>
+
+<body class="{% block body_class %}{% endblock %}">
+  <!-- Navbar pública con misma estructura visual que JIO -->
+  <nav class="navbar">
+    <a class="navbar-brand" href="{% url 'FiestaEntreOso_app:index' %}">
+      <span class="brand-logo" aria-hidden="true">
+        <img src="{% static 'images/logo_jio.png' %}" alt="Fiesta Entre Oso" class="brand-logo-img">
+      </span>
+      <span class="brand-text">
+        Fiesta Entretenida Osorno <span class="brand-subtext">Juegos inflables y eventos</span>
+      </span>
+    </a>
+    <div class="navbar-menu">
+      <div class="navbar-user">
+        <button class="nav-toggle" id="navToggle" type="button" aria-label="Abrir menú" aria-controls="navLinks" aria-expanded="false">
+          <img src="{% static 'images/favicon.png' %}" alt="" class="nav-toggle-icon">
+        </button>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="{% url 'FiestaEntreOso_app:index' %}" class="nav-link">Inicio</a></li>
+          <li><a href="#historia" class="nav-link">Historia</a></li>
+          <li><a href="#arriendos" class="nav-link">Arriendos</a></li>
+          <li><a href="#actividades" class="nav-link">Actividades</a></li>
+          <li>
+            <a href="#contacto" class="nav-cta nav-cta-solid" id="openContacto">Contacto</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Contenido dinámico -->
+  <main class="main-content">
+    {% block content %}
+    {% endblock %}
+  </main>
+
+  <footer class="footer-negro" id="contacto">
+    <p>© {% now "Y" %} Fiesta Entre Oso</p>
+    <p>Osorno, Chile • Juegos inflables, eventos y actividades familiares</p>
+    <p>Contacto directo: +56 9 1234 5678 • fiestaentreoso@gmail.com</p>
+  </footer>
+
+  <!-- Pop-up de formulario de contacto -->
+  <div id="contactoModal" class="modal hidden">
+    <div class="modal-content">
+      <span class="close" id="closeContacto">&times;</span>
+      <div class="login-container">
+        <form id="contactoForm" action="{% url 'FiestaEntreOso_app:enviar_contacto' %}" method="post">
+          {% csrf_token %}
+          <h1>¿Necesitas más información?</h1>
+          <p class="login-subtitle">Cuéntanos de tu evento y te contactamos.</p>
+
+          <div class="input-group">
+            <input type="text" name="nombre" placeholder="Tu nombre" required />
+          </div>
+
+          <div class="input-group">
+            <input type="email" name="email" placeholder="Correo electrónico" />
+          </div>
+
+          <div class="input-group">
+            <input type="tel" name="telefono" placeholder="Teléfono / WhatsApp" />
+          </div>
+
+          <div class="input-group">
+            <textarea name="mensaje" rows="4" placeholder="Cuéntanos fecha, lugar, tipo de evento y edades de los niños" required></textarea>
+          </div>
+
+          <button type="submit" class="login-btn">Enviar consulta</button>
+          <p id="contactoFeedback" class="login-subtitle" style="margin-top: 0.75rem;"></p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="{% static 'js/contacto_popup.js' %}"></script>
+
+  {% block extra_scripts %}{% endblock %}
+</body>
+</html>
+
