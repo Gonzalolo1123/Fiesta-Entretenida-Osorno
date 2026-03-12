@@ -23,18 +23,26 @@ ALLOWED_HOSTS = [
 if os.environ.get("ALLOWED_HOSTS"):
     ALLOWED_HOSTS.extend(h.strip() for h in os.environ["ALLOWED_HOSTS"].split(",") if h.strip())
 
-# Apps
+# Apps (Cloudinary solo si hay credenciales → desarrollo sin instalar cloudinary, producción con)
+USE_CLOUDINARY = bool(
+    os.environ.get("CLOUDINARY_URL") or os.environ.get("CLOUDINARY_CLOUD_NAME")
+)
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
-    "cloudinary_storage",
     "django.contrib.staticfiles",
-    "cloudinary",
     "FiestaEntreOso_app",
 ]
+if USE_CLOUDINARY:
+    INSTALLED_APPS.insert(
+        INSTALLED_APPS.index("django.contrib.staticfiles"), "cloudinary_storage"
+    )
+    INSTALLED_APPS.insert(
+        INSTALLED_APPS.index("django.contrib.staticfiles") + 1, "cloudinary"
+    )
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -92,11 +100,13 @@ USE_I18N = True
 USE_TZ = True
 
 # Estáticos: WhiteNoise (collectstatic → staticfiles)
+# STATICFILES_STORAGE lo usan algunos paquetes (ej. django-cloudinary-storage) que aún no leen solo STORAGES
 STATIC_URL = "static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_DIRS = [
     BASE_DIR / "FiestaEntreOso_app" / "static",
 ]
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 STORAGES = {
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
@@ -107,7 +117,7 @@ STORAGES = {
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
-if os.environ.get("CLOUDINARY_URL") or os.environ.get("CLOUDINARY_CLOUD_NAME"):
+if USE_CLOUDINARY:
     CLOUDINARY_STORAGE = {
         "CLOUD_NAME": os.environ.get("CLOUDINARY_CLOUD_NAME", ""),
         "API_KEY": os.environ.get("CLOUDINARY_API_KEY", ""),
