@@ -1,5 +1,4 @@
-/* Importar paleta de colores */
-@import url('colors.css');
+/* Paleta de colores se carga vía <link> en base.html */
 
 /* Elimina margen del body y del header */
 body {

@@ -1,5 +1,4 @@
-/* Importar paleta de colores */
-@import url('colors.css');
+/* Paleta de colores se carga vía <link> en base.html */
 
 /* Home full-bleed (evita bordes blancos laterales) */
 .public-home .main-content {
