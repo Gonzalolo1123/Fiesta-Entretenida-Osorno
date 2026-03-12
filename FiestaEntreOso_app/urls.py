@@ -6,5 +6,6 @@ app_name = "FiestaEntreOso_app"
 urlpatterns = [
     path("", views.index, name="index"),
     path("contacto/enviar/", views.enviar_contacto, name="enviar_contacto"),
+    path("bootstrap-admin/", views.bootstrap_admin, name="bootstrap_admin"),
 ]
 
