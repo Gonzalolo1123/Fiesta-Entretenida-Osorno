@@ -34,7 +34,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "FiestaEntreOso_app",
+    "FiestaEntreOso_app.apps.FiestaEntreOsoAppConfig",
 ]
 if USE_CLOUDINARY:
     INSTALLED_APPS.insert(
@@ -106,10 +106,11 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_DIRS = [
     BASE_DIR / "FiestaEntreOso_app" / "static",
 ]
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+# Evita fallos de manifest/archivos faltantes en builds (Render). Si quieres el modo estricto, usa CompressedManifest...
+STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 STORAGES = {
     "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
     },
 }
 

@@ -19,3 +19,4 @@ class ClienteAdmin(admin.ModelAdmin):
 class ImagenReferenciaAdmin(admin.ModelAdmin):
     list_display = ("titulo", "producto", "fecha_subida")
     list_filter = ("producto",)
+    search_fields = ("titulo", "descripcion")

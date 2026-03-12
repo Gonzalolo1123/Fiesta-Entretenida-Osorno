@@ -131,3 +131,4 @@ dmypy.json
 # Django specific
 media/
 staticfiles/
+static_root/

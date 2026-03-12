@@ -6,3 +6,7 @@ class FiestaEntreOsoAppConfig(AppConfig):
     name = "FiestaEntreOso_app"
     verbose_name = "Sitio público Fiesta Entre Oso"
 
+    def ready(self):
+        # Registra señales (auto-creación de productos desde imágenes de referencia)
+        from . import signals  # noqa: F401
+
