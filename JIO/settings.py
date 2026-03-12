@@ -23,10 +23,10 @@ ALLOWED_HOSTS = [
 if os.environ.get("ALLOWED_HOSTS"):
     ALLOWED_HOSTS.extend(h.strip() for h in os.environ["ALLOWED_HOSTS"].split(",") if h.strip())
 
-# Cloudinary (solo para MEDIA). Importante: NO agregamos cloudinary_storage a INSTALLED_APPS
-# porque ese paquete modifica collectstatic y en Render puede provocar faltantes del admin.
-USE_CLOUDINARY = bool(
-    os.environ.get("CLOUDINARY_URL") or os.environ.get("CLOUDINARY_CLOUD_NAME")
+# Cloudinary (solo para MEDIA).
+# Se activa solo si existe CLOUDINARY_URL (recomendado) o si están las 3 variables separadas.
+USE_CLOUDINARY = bool(os.environ.get("CLOUDINARY_URL")) or all(
+    os.environ.get(k) for k in ("CLOUDINARY_CLOUD_NAME", "CLOUDINARY_API_KEY", "CLOUDINARY_API_SECRET")
 )
 INSTALLED_APPS = [
     "django.contrib.admin",
